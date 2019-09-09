@@ -1,0 +1,180 @@
+
+<!doctype html>
+<html lang="en">
+
+
+
+<head>
+
+    <style>
+        #chartdiv {
+            width: 100%;
+            height: 900px;
+        }
+    </style>
+
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+    <script type="text/javascript" src="8_CloneOps_8_Threads.js"></script>
+    <script type="text/javascript" src="creategraph.js"></script>
+    <script type="text/javascript">
+        function draw() {
+            //console.log(data)
+            am4core.ready(function () {
+                // Themes begin
+                var titlearray = []
+                var indx = 1
+                am4core.useTheme(am4themes_animated);
+                // Themes end
+
+
+
+                var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+                chart.colors.list = [
+                    am4core.color("#3498DB"),
+                    am4core.color("#CD5C5C"), am4core.color("#FF9900"), am4core.color("#0066CC"), am4core.color("#CCCC00"),
+                    am4core.color("#669933"), am4core.color("#CCCCFF"), am4core.color("#CC9900"), am4core.color("#999966"),
+                    am4core.color("#CC99CC"), am4core.color("#FF9999"), am4core.color("#CC6600"), am4core.color("#CC66CC"),
+                    am4core.color("#0066FF"), am4core.color("#FF6699"), am4core.color("#CC3300"), am4core.color("#CC33CC"),
+                    am4core.color("#99CC66"), am4core.color("#FF3399"), am4core.color("#66CCCC"), am4core.color("#669999"),
+                    am4core.color("#CC0000"), am4core.color("#660000"), am4core.color("#3366CC"), am4core.color("#6600CC"),
+                    am4core.color("#663300"), am4core.color("#993300"), am4core.color("#666600"), am4core.color("#666699"),
+                    am4core.color("#6666FF"), am4core.color("#669900"), am4core.color("#003333")
+                ];
+                colorindx = 0
+
+                var scrollbarX = new am4charts.XYChartScrollbar();
+                var scrollbarY = new am4charts.XYChartScrollbar();
+                //var scrollbarY = new am4charts.ChartScrollbar();
+                var interfaceColors = new am4core.InterfaceColorSet();
+
+                chart.data = data;
+                // the following line makes value axes to be arranged vertically.
+                chart.leftAxesContainer.layout = "vertical";
+
+                var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+                dateAxis.renderer.grid.template.location = 0;
+                dateAxis.renderer.ticks.template.length = 8;
+                dateAxis.renderer.ticks.template.strokeOpacity = 0.1;
+                dateAxis.renderer.grid.template.disabled = true;
+                dateAxis.renderer.ticks.template.disabled = false;
+                dateAxis.renderer.ticks.template.strokeOpacity = 0.2;
+
+                var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                valueAxis.tooltip.disabled = false;
+                valueAxis.title.text = "Progress %";
+                valueAxis.zIndex = 1;
+                valueAxis.renderer.baseGrid.disabled = true;
+
+                // Set up axis
+                valueAxis.renderer.inside = true;
+                valueAxis.height = am4core.percent(60);
+                valueAxis.renderer.labels.template.verticalCenter = "bottom";
+                valueAxis.renderer.labels.template.padding(2, 2, 2, 2);
+                //valueAxis.renderer.maxLabelPosition = 0.95;
+                valueAxis.renderer.fontSize = "0.8em"
+
+                // uncomment these lines to fill plot area of this axis with some color
+                valueAxis.renderer.gridContainer.background.fill = interfaceColors.getFor("alternativeBackground");
+                valueAxis.renderer.gridContainer.background.fillOpacity = 0.05;
+
+
+
+
+                //Iterate on all VMs and Plot
+                vmarray.forEach(element => {
+
+                    var series0 = chart.series.push(new am4charts.LineSeries());
+                    series0.dataFields.dateX = "date";
+                    series0.dataFields.valueY = [element];
+                    series0.fill = chart.colors.getIndex(colorindx);
+                    colorindx = colorindx + 1;
+                    //series.tooltipText = "{valueY.value}";
+                    var bullet = series0.bullets.push(new am4charts.CircleBullet());
+
+                    bullet.tooltipText = "{valueY.value} :" + element
+                    series0.name = [element];
+
+
+                    scrollbarX.series.push(series0);
+                    scrollbarY.series.push(series0)
+
+
+
+                });
+
+
+                titlearray.push({ "Axes": valueAxis, "Name": "VMs Operation Data Progress/ Time" })
+
+
+
+
+                chart.legend = new am4charts.Legend();
+
+                // Set Title for Subplots
+
+
+                title_indx = 1
+                titlearray.forEach(element => {
+                    //var title_axis = element["Axes"];
+                    var title_name = element["Name"];
+                    console.log(element["Axes"].title.text)
+                    var title2 = "title" + title_indx
+                    title_indx = title_indx + 1;
+                    window[title2] = element["Axes"].renderer.gridContainer.createChild(am4core.Label);
+                    window[title2].text = "[bold]" + title_name;
+                    window[title2].fill = chart.colors.getIndex(0);
+                    //window[title2].fill = series.fill;
+                    window[title2].isMeasured = false;
+                    window[title2].y = 15;
+                    window[title2].x = am4core.percent(40);
+                    window[title2].align = "center";
+                    window[title2].textAlign = "middle";
+
+                }
+                );
+
+
+
+                chart.cursor = new am4charts.XYCursor();
+
+                chart.cursor.xAxis = dateAxis;
+                scrollbarX.marginBottom = 20;
+                chart.scrollbarX = scrollbarX;
+
+                //chart.cursor.yAxis = valueAxis;
+
+                //chart.scrollbarY = scrollbarY;
+                //chart.cursor.behavior = "zoomY";
+
+                chart.scrollbarY = new am4core.Scrollbar();
+
+
+                //chart.scrollbarY = new am4core.Scrollbar();
+
+
+
+                // Enable export
+                chart.exporting.menu = new am4core.ExportMenu();
+                chart.exporting.menu.align = "left";
+                chart.exporting.menu.verticalAlign = "top";
+
+
+            }); // end am4core.ready()
+
+        }
+
+    </script>
+
+</head>
+
+
+<body onload="load();draw();">
+    <div id="chartdiv"> </div>
+</body>
+
+</html>
+

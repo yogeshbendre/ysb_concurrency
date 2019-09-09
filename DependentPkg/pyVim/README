@@ -1,0 +1,8 @@
+# README file
+
+# Python files from this directory are packaged for official ESX build.
+# Please don't include any *.py file if you don't want it to end up in 
+# official build.
+# The files are packaged using 'pyvim-files' scons build node.
+# If you add new *.py files, you are not required to change any scons 
+# build script files to include newly created files.

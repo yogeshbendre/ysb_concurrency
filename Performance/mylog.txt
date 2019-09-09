@@ -1,0 +1,33 @@
+2019-09-06 12:24:33,887 INFO Tests The Logger
+2019-09-06 12:24:33,901 DEBUG Setting up pools and process for migration
+2019-09-06 12:24:33,901 INFO Start Test CloneOps
+2019-09-06 12:24:34,573 DEBUG THREAD - MAIN - Instance 1 specs for Test-VM-17 operation is 10.172.109.23 administrator@skyscraper.local Admin!23 Datacenter3 cloud_cluster_3 cloud_cluster_4 w1-hs4-n2206.eng.vmware.com Local-2206-1 vmnic0
+2019-09-06 12:24:37,923 INFO Login Successful
+2019-09-06 12:24:39,033 INFO Got Dataceneter MOR
+2019-09-06 12:24:39,033 INFO Obtaining Container cluster for VM
+2019-09-06 12:24:41,467 INFO Got container cluster
+2019-09-06 12:24:41,467 INFO Obtaining Destination Datastore 
+2019-09-06 12:24:41,483 DEBUG Getting datastore mob Local-2206-1
+2019-09-06 12:24:49,654 INFO Got Destination datastore mor
+2019-09-06 12:24:49,654 INFO Obtaining Destination Host mor
+2019-09-06 12:24:53,433 INFO Got Destination Host mor
+2019-09-06 12:24:53,434 DEBUG Finding VM Test-VM-17 via property collector.
+2019-09-06 12:24:54,335 INFO VM Test-VM-17 found
+2019-09-06 12:24:54,335 INFO THREAD -Test-VM-17- End of VM Spec
+2019-09-06 12:24:54,335 INFO Starting Stat collection Pool
+2019-09-06 12:24:54,335 DEBUG Stats for Host that needs to plot {'nic': True, 'datastore': True, 'disk': False}
+2019-09-06 12:24:54,335 DEBUG Monitor Spec Datacenter3 , cloud_cluster_4 , w1-hs4-n2206.eng.vmware.com , vmnic0 , ['Local-2206-1']
+2019-09-06 12:24:54,335 INFO THREAD - LOGIN - Getting connect anchor to VC 10.172.109.23
+2019-09-06 12:24:57,551 INFO Login Successful
+2019-09-06 12:24:58,651 INFO Got Dataceneter MOR
+2019-09-06 12:24:58,671 INFO Created DB Successfully.
+2019-09-06 12:25:04,084 DEBUG THREAD -MainProcess- Link Speed is  10000
+2019-09-06 12:25:05,397 DEBUG THREAD -MainProcess- Datastore IDs {'5d620e87-d87e88f2-db1f-e4434b82e87c': 'Local-2206-1'}
+2019-09-06 12:25:05,785 INFO THREAD -MainProcess- w1-hs4-n2206.eng.vmware.com host stats collection iteration 1
+2019-09-06 12:25:06,776 INFO = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2019-09-06 12:25:16,793 INFO THREAD -MainProcess- w1-hs4-n2206.eng.vmware.com host stats collection iteration 2
+2019-09-06 12:25:18,298 INFO = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2019-09-06 12:25:28,313 INFO THREAD -MainProcess- w1-hs4-n2206.eng.vmware.com host stats collection iteration 3
+2019-09-06 12:25:29,806 INFO = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+2019-09-06 12:25:39,828 INFO THREAD -MainProcess- w1-hs4-n2206.eng.vmware.com host stats collection iteration 4
+2019-09-06 12:25:41,339 INFO = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
