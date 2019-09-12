@@ -24,7 +24,7 @@ import plotly.graph_objs as go
 from collections import defaultdict, namedtuple
 import traceback
 
-vmdb = ["Mig-VM-01", "Mig-VM-02", "Mig-VM-03", "Mig-VM-04"]
+vmdb = ["YSB-New-VM"]
 
 host_stat_spec = defaultdict()
 hostdetails = namedtuple('hostdetails', ['nic'])
@@ -74,7 +74,7 @@ try:
 
     # This plots VM Stats
 
-    """
+
 
     for vm in vmdb:
         rowVMSession = None
@@ -91,7 +91,8 @@ try:
             results = rowVMSession.query(VMStats.time,VMStats.progress)
 
             for result in results:
-                vm_data.setdefault(vm,[]).append({"Time":result[0]*1000 , "Progress" :result[1] })
+                print("Time:%s Progress: %s "%(result[0]*1000,result[1] ))
+                #vm_data.setdefault(vm,[]).append({"Time":result[0]*1000 , "Progress" :result[1] })
 
 
 
@@ -166,10 +167,11 @@ try:
         finally:
             rowEsxSession.close()
 
-
+    """
 except Exception as e:
     traceback.print_exc("THREAD -main- Error while reading data from ESX DB %s" % (e))
 
+"""
 
 final_data["vm"] = dict(vm_data)
 final_data["nic"] = dict(host_nic)
@@ -179,3 +181,4 @@ x = json.dumps(final_data,indent=4)
 
 with open("testdata.js","w") as f:
     f.write("var testdata = %s"%x)
+"""

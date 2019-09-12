@@ -42,7 +42,7 @@ Base = declarative_base()
 def v_create_handler_wrapper(args):
     return vm_create_handler(*args)
 
-def vm_create_handler(logger, si, dcMor,host_mor, datastore,vm_name, task_pool, task_results):
+def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, task_pool, task_results):
 
     try:
 
@@ -53,8 +53,8 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,vm_name, task_pool, 
         logger.info('THREAD %s - Setting folder to datacenter root folder as a datacenter has been defined' % vm_name)
         folder = dcMor.vmFolder
 
-        datastore_path = '[' + datastore + '] ' + vm_name
-        logger.info('THREAD %s - Setting vmx path: %s' % datastore_path)
+        datastore_path = '[' + ds_name + '] ' + vm_name
+        logger.info('THREAD %s - Setting vmx path: %s' % (vm_name, datastore_path))
 
         # bare minimum VM shell, no disks. Feel free to edit
         vmx_file = vim.vm.FileInfo(logDirectory=None,
@@ -114,10 +114,11 @@ def runTest():
             dest_datastore = tc.getXDatastore()
             #powerstate = tc.getPowerState()
             vm_name = tc.getVM()
+            #if 'R'
             print(vcenter)
-
-            tc.logger.debug("THREAD - MAIN - Instance %s specs for %s operation is %s %s %s %s %s %s %s %s %s" % (
-            instance, test_vm, vcenter, vcenter_user,
+            print("Hi There")
+            tc.logger.debug("THREAD - MAIN - Instance %s specs for %s operation is %s %s %s %s %s %s %s %s" % (
+            instance, vm_name, vcenter, vcenter_user,
             vcenter_pass, dest_datacenter, dest_cluster, dest_host, dest_datastore, pnic))
 
 
@@ -156,7 +157,7 @@ def runTest():
 
 
 
-            createvm_specs.append((logger, si, dcMor,host_mor, ds_mor, vm_name, task_pool, task_results))
+            createvm_specs.append((logger, si, dcMor,host_mor, ds_mor,dest_datastore, vm_name, task_pool, task_results))
             logger.info("THREAD - End of VM Spec")
 
         logger.info("Starting Stat collection Pool")

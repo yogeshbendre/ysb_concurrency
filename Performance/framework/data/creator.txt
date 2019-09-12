@@ -4,16 +4,50 @@ CreateVmOps-*-PRIMARY_LDU_PASSWD=Admin!23
 CreateVmOps-*-PNIC=vmnic0
 CreateVmOps-*-STAT_COLLLECTION_LIST=pnic,datastore
 
-CreateVmOps-*-DEST_DATACENTER=Datacenter3
-CreateVmOps-*-DEST_CLUSTER=cloud_cluster_4
-CreateVmOps-*-DEST_HOST_NAME=w1-hs4-n2206.eng.vmware.com
-CreateVmOps-1-DEST_DATASTORE=Local-2206-1
+CreateVmOps-*-DEST_DATACENTER=Datacenter4
+CreateVmOps-*-DEST_CLUSTER=cloud_cluster_6
+CreateVmOps-*-DEST_HOST_NAME=w1-hs4-n2213.eng.vmware.com
+
+CreateVmOps-1-DEST_DATASTORE=Local-2213-1
+CreateVmOps-2-DEST_DATASTORE=Local-2213-1
+CreateVmOps-3-DEST_DATASTORE=Local-2213-1
+CreateVmOps-4-DEST_DATASTORE=Local-2213-1
+CreateVmOps-5-DEST_DATASTORE=Local-2213-1
+CreateVmOps-6-DEST_DATASTORE=Local-2213-1
+CreateVmOps-7-DEST_DATASTORE=Local-2213-1
+CreateVmOps-8-DEST_DATASTORE=Local-2213-1
+CreateVmOps-9-DEST_DATASTORE=Local-2213-1
+CreateVmOps-10-DEST_DATASTORE=Local-2213-1
+CreateVmOps-11-DEST_DATASTORE=Local-2213-1
+CreateVmOps-12-DEST_DATASTORE=Local-2213-1
+CreateVmOps-13-DEST_DATASTORE=Local-2213-1
+CreateVmOps-14-DEST_DATASTORE=Local-2213-1
+CreateVmOps-15-DEST_DATASTORE=Local-2213-1
+CreateVmOps-16-DEST_DATASTORE=Local-2213-1
+
+CreateVmOps-1-DEST_DATASTORE=vm-1
+CreateVmOps-2-DEST_DATASTORE=vm-2
+CreateVmOps-3-DEST_DATASTORE=vm-3
+CreateVmOps-4-DEST_DATASTORE=vm-4
+CreateVmOps-5-DEST_DATASTORE=vm-5
+CreateVmOps-6-DEST_DATASTORE=vm-6
+CreateVmOps-7-DEST_DATASTORE=vm-7
+CreateVmOps-8-DEST_DATASTORE=vm-8
+CreateVmOps-9-DEST_DATASTORE=vm-9
+CreateVmOps-10-DEST_DATASTORE=vm-10
+CreateVmOps-11-DEST_DATASTORE=vm-11
+CreateVmOps-12-DEST_DATASTORE=vm-12
+CreateVmOps-13-DEST_DATASTORE=vm-13
+CreateVmOps-14-DEST_DATASTORE=vm-14
+CreateVmOps-15-DEST_DATASTORE=vm-15
+CreateVmOps-16-DEST_DATASTORE=vm-16
+
 CreateVmOps-1-VM_NAME=YSB-NEW-VM
 
-CreateVmOps-1-SRC_VM_NAME=Test-VM-17
+CreateVmOps-*-SRC_VM_NAME=Test-VM-17
 
 
 
-CreateVmOps-*-DATACENTER=Datacenter3
-CreateVmOps-*-CLUSTER=cloud_cluster_3
+CreateVmOps-*-DATACENTER=Datacenter4
+CreateVmOps-*-CLUSTER=cloud_cluster_6
 
