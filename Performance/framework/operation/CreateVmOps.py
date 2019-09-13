@@ -94,7 +94,7 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         disk_spec.device.backing.thinProvisioned = False
 
         disk_spec.device.backing.diskMode = 'persistent'
-        disk_spec.device.eagerlyScrub = True
+        disk_spec.device.backing.eagerlyScrub = True
         disk_spec.device.unitNumber = unit_number
         disk_spec.device.capacityInKB = 20 * 1024 * 1024
         disk_spec.device.controllerKey = scsi_ctr.device.key
