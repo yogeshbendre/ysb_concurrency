@@ -96,9 +96,9 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         disk_spec.device.backing.diskMode = 'persistent'
         disk_spec.device.unitNumber = unit_number
         disk_spec.device.capacityInKB = 20 * 1024 * 1024
-        disk_spec.device.controllerKey = controller.key
+        disk_spec.device.controllerKey = scsi_ctr.device.key
         deviceChanges = []
-        deviceChanges.append(scsi_ctr)
+        deviceChanges.append(scsi_ctr,disk_spec)
 
 
 
