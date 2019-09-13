@@ -100,6 +100,8 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         deviceChanges = []
         deviceChanges.append(scsi_ctr,disk_spec)
 
+        print(deviceChanges)
+
 
 
 
@@ -108,6 +110,7 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
                                    files=vmx_file, guestId='dosGuest',
                                    version='vmx-13',deviceChange=deviceChanges)
 
+        print(createspec)
         logger.debug('THREAD %s - Creating createvm task' % vm_name)
         task = folder.CreateVM_Task(config=createspec, pool=resource_pool,host=host_mor)
 
