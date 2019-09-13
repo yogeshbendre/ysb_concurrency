@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="680d693b-aec7-4e47-a82f-fa5d2ff6b829" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/framework/data/creator1vm.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/operation/CreateVmOps.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/operation/CreateVmOps.py" afterDir="false" />
     </list>
@@ -18,13 +19,13 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/framework/operation" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/framework/data" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ybendre\Perforce\Concurrency\Performance\framework\operation" />
       <recent name="C:\Users\ybendre\Perforce\Concurrency\Performance\framework\data" />
+      <recent name="C:\Users\ybendre\Perforce\Concurrency\Performance\framework\operation" />
     </key>
   </component>
   <component name="RunDashboard">
