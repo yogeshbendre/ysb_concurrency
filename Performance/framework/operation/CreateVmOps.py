@@ -73,6 +73,14 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         controller_spec.operation = vim.vm.device.VirtualDeviceSpec.Operation.add
         controller_spec.device = controller
 
+        scsi_ctr = vim.vm.device.VirtualDeviceSpec()
+        scsi_ctr.operation = vim.vm.device.VirtualDeviceSpec.Operation.add
+        scsi_ctr.device = vim.vm.device.ParaVirtualSCSIController()
+        scsi_ctr.device.busNumber = 1
+        scsi_ctr.device.hotAddRemove = True
+        scsi_ctr.device.sharedBus = 'noSharing'
+        scsi_ctr.device.scsiCtlrUnitNumber = 7
+
         unit_number = 0
 
         disk_spec = vim.vm.device.VirtualDeviceSpec()
@@ -90,7 +98,7 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         disk_spec.device.capacityInKB = 20 * 1024 * 1024
         disk_spec.device.controllerKey = controller.key
         deviceChanges = []
-        deviceChanges.append(controller_spec)
+        deviceChanges.append(scsi_ctr)
 
 
 
