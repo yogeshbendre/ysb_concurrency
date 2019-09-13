@@ -65,9 +65,32 @@ def vm_create_handler(logger, si, dcMor,host_mor, datastore,ds_name,vm_name, tas
         # Creating necessary specs
         logger.debug('THREAD %s - Creating createvm spec' % vm_name)
 
-        createspec = vim.vm.ConfigSpec(name=vm_name, memoryMB=128, numCPUs=1,
+        unit_number = 0
+
+        disk_spec = vim.vm.device.VirtualDeviceSpec()
+        disk_spec.fileOperation = "create"
+        disk_spec.operation = vim.vm.device.VirtualDeviceSpec.Operation.add
+        disk_spec.device = vim.vm.device.VirtualDisk()
+
+        disk_spec.device.backing = \
+            vim.vm.device.VirtualDisk.FlatVer2BackingInfo()  # https://github.com/vmware/pyvmomi/tree/575ab56eb56f32f53c98f40b9b496c6219c161da/docs/vim/vm/device/VirtualDisk
+
+        disk_spec.device.backing.thinProvisioned = False
+
+        disk_spec.device.backing.diskMode = 'persistent'
+        disk_spec.device.unitNumber = unit_number
+        disk_spec.device.capacityInKB = 20 * 1024 * 1024
+        disk_spec.device.controllerKey = 0 #controller.key
+        deviceChanges = []
+        deviceChanges.append(disk_spec)
+
+
+
+
+
+        createspec = vim.vm.ConfigSpec(name=vm_name, memoryMB=16384, numCPUs=4,
                                    files=vmx_file, guestId='dosGuest',
-                                   version='vmx-13')
+                                   version='vmx-13',deviceChange=deviceChanges)
 
         logger.debug('THREAD %s - Creating createvm task' % vm_name)
         task = folder.CreateVM_Task(config=createspec, pool=resource_pool,host=host_mor)
