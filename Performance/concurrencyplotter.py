@@ -71,17 +71,21 @@ Base = declarative_base()
 
 #vmdb = ["VM-1" , "VM-2", "VM-3", "VM-4", "VM-5", "VM-6","VM-7" , "VM-8", "VM-9", "VM-10", "VM-11", "VM-12", "VM-13", "VM-14", "VM-15", "VM-16"]
 
-vmdb = ["VM-14" ,  "VM-7",  "VM-10", "VM-13", "VM-5", "VM-4", "VM-6", "VM-16"]
+#vmdb = ["VM-14" ,  "VM-7",  "VM-10", "VM-13", "VM-5", "VM-4", "VM-6", "VM-16"]
+vmdb = ["Test-VM-Y1" ,  "Test-VM-Y2",  "Test-VM-Y3", "Test-VM-Y4", "Test-VM-Y5", "Test-VM-Y6", "Test-VM-Y7", "Test-VM-Y8"]
 
 hs_data = {}
 hostdetails = namedtuple('hostdetails',['vcenter', 'vcenter_user', 'vcenter_pass', 'datacenter', 'cluster', 'nic', 'disk'])
 
 """jj
-hs1 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter3","cls","vmnic1","vmhba2")
-hs2 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter3","cls","vmnic1","vmhba2")
+hs1 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter4","cloud_cluster_6","vmnic1","vmhba2")
+hs2 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter4","cloud_cluster_6","vmnic1","vmhba2")
 
-src = "w1-hs4-n2203.eng.vmware.com"
-dest = "w1-hs4-n2205.eng.vmware.com"
+#src = "w1-hs4-n2203.eng.vmware.com"
+#dest = "w1-hs4-n2205.eng.vmware.com"
+src = "w1-hs4-n2213.eng.vmware.com"
+dest = "w1-hs4-n2216.eng.vmware.com"
+
 """
 
 hs1 = hostdetails("10.199.24.1","Administrator@vsphere.local","Admin!23","Datacenter3","cls","vmnic1","vmhba64")
