@@ -6,7 +6,7 @@ Company : VMWare Inc.
                         http://www.apache.org/licenses/
 
 """
-from collections import namedtuple
+from collections import namedtuple,defaultdict
 
 """
 
@@ -27,11 +27,17 @@ logger = None
 pool = None
 task_pool = None
 task_results = []
+METRICS_DATA = {}
+
+HOST_METRICS_COLLECT = True
+
 instance = 1
 stat_enable = {"nic" : False , "datastore" : False , "disk" : False, "cpu" : False , "mem" : False}
 
 plottervmlist = []
-
+vmdb = []
+host_stat_spec = defaultdict(list)
+hs_data = {}
 
 PRIMARY_LDU_NAME = None
 SECONDARY_LDU_NAME = None
@@ -58,6 +64,12 @@ SRC_PNIC = None
 
 POWER_STATE=None
 SRC_VM_NAME = None
+
+
+SRC_DISK = None
+DEST_DISK = None
+
+
 
 
 
@@ -144,6 +156,15 @@ def getPowerState():
 
 def getSrcVM():
     return getData(test_data,"SRC_VM_NAME")
+
+
+
+def getSrcDisk():
+    return getData(test_data, "SRC_DISK")
+
+def getDestDisk():
+    return getData(test_data, "DEST_DISK")
+
 
 ######################## DATA GETER METHOD ###############
 
