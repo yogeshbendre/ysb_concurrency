@@ -27,12 +27,11 @@ from dateutil import tz
 from collections import defaultdict
 from pydoc import locate
 
-
+from framework.common import TestConstants as tc
 
 
 
 from sqlalchemy.ext.declarative import declarative_base
-
 from sqlalchemy import create_engine,Table, Column, Integer, String, MetaData
 import os
 
@@ -164,6 +163,7 @@ def main():
         #print ("%s , %s "%(tc.test_data, instances))
         test_specs = []
         TestConstants.logger.info("Start Test %s"%ops_name)
+        logger = TestConstants.logger
         TestConstants.testname = ops_name
         TestConstants.stressparam = stressparam
         TestConstants.test_data,TestConstants.process = DataParser.DataGenerator(TestConstants.stressparam, TestConstants.testname)
@@ -206,3 +206,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    print "End of Main Function"

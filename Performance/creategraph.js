@@ -3,6 +3,7 @@ var vmarray = [];
 var nicarray = [];
 var dsarray = [];
 var memarray = [];
+var diskarray = [];
 
 function load() {
 
@@ -43,6 +44,21 @@ function load() {
         dsDatas.forEach(element => {
             data.push({ date: new Date(element["Time"]), [readLatencyKey]: element["ReadLatency"] ,
             [writeLatencyKey] : element["WriteLatency"], [readKey]:element["Read"],[writeKey]:element["Write"]});
+        });
+
+    }
+
+    diskresult = testdata.disk
+    for (var ds in diskresult){
+        var totalLatencyKey = ds + "Latency"
+
+        var readKey = ds + "Read"
+        var writeKey = ds + "Write"
+        diskarray.push(ds)
+        diskDatas = diskresult[ds]
+        diskDatas.forEach(element => {
+            data.push({ date: new Date(element["Time"]), [totalLatencyKey]: element["TotalLatency"] ,
+             [readKey]:element["Read"],[writeKey]:element["Write"]});
         });
 
     }

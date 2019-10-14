@@ -9,6 +9,7 @@ Company : VMWare Inc.
 
 from framework.common import TestConstants as tc
 from framework.common import EsxStats as EsxStats
+from framework.common import Esxtop as Esxtop
 from framework.common import TaskAnalyzer as TaskAnalyzer
 from framework.common import GraphPlotter as GraphPlotter
 from framework.graphs import GraphFeeder as GraphFeeder
@@ -45,10 +46,12 @@ def v_motion_handler_wrapper(args):
     return v_motion_handler(*args)
 
 
-def v_motion_handler(logger,si,template_vm,host_mor,ds_mor,task_pool,task_results):
+def v_motion_handler(logger,si,template_vm,host_mor,ds_mor):
     """
     Will handle the thread handling migration of virtual machine and run post processing
     """
+
+    #time.sleep(10) # Sleep Introduced to trigger Host Collection Stats
 
 
     if ds_mor is None:
@@ -97,15 +100,14 @@ def runTest():
 
     migration_specs = []
     vmotionnic = {}
-    vmdb = []
-    host_stat_spec = defaultdict(list)
+
 
     #cluster host will contain the information of cluster to which the host belongs
     clusterhost = {}
 
-    hostdetails = namedtuple('hostdetails',['vcenter', 'vcenter_user', 'vcenter_pass', 'datacenter', 'cluster', 'nic'])
+    hostdetails = namedtuple('hostdetails',['vcenter', 'vcenter_user', 'vcenter_pass', 'datacenter', 'cluster', 'nic', 'disk'])
 
-    hs_data = {}
+    #hs_data = {}
 
     try:
 
@@ -122,36 +124,39 @@ def runTest():
             host = tc.getXHost()
             datastore = tc.getXDatastore()
             pnic = tc.getPnic()
+            dest_disk = tc.getDestDisk()
 
             #Source Host Parameter
 
             src_host = tc.getHost()
             src_nic = tc.getSrcPnic()
             src_datastore = tc.getDatastore()
+            src_disk = tc.getSrcDisk()
 
 
-
+            """
 
             tc.logger.debug("THREAD - MAIN - Instance %s specs for %s operation is %s %s %s %s %s %s %s %s %s" % (
             instance, test_vm, vcenter, vcenter_user,
             vcenter_pass, dest_datacenter, container, destination_cluster, host, datastore, pnic))
+            """
 
 
             #clusterhost[host] = destination_cluster
 
-            hs = hostdetails(vcenter,vcenter_user,vcenter_pass,dest_datacenter,destination_cluster,pnic)
+            hs = hostdetails(vcenter,vcenter_user,vcenter_pass,dest_datacenter,destination_cluster,pnic,dest_disk)
 
-            hs_data[host] = hs
+            tc.hs_data[host] = hs
 
             #vmotionnic[host] = pnic
 
-            host_stat_spec.setdefault(host, []).append(datastore)
+            tc.host_stat_spec.setdefault(host, []).append(datastore)
 
             # Source Host Spec for Stat Collection
 
-            src_hs = hostdetails(vcenter, vcenter_user, vcenter_pass, src_datacenter, container, src_nic)
-            hs_data[src_host] = src_hs
-            host_stat_spec.setdefault(src_host, []).append(src_datastore)
+            src_hs = hostdetails(vcenter, vcenter_user, vcenter_pass, src_datacenter, container, src_nic,src_disk)
+            tc.hs_data[src_host] = src_hs
+            tc.host_stat_spec.setdefault(src_host, []).append(src_datastore)
 
 
 
@@ -206,9 +211,9 @@ def runTest():
                 logger.error('Unable to find VM %s' % vm_mor)
                 return 1
             else:
-                vmdb.append(test_vm)
+                tc.vmdb.append(test_vm)
 
-            migration_specs.append((logger, si, vm_mor, host_mor, ds_mor, task_pool, task_results))
+            migration_specs.append((logger, si, vm_mor, host_mor, ds_mor))
             logger.info("THREAD -%s- End of VM Spec"%test_vm)
 
         logger.info("Starting Stat collection Pool")
@@ -219,36 +224,48 @@ def runTest():
 
 
 
-        for host, dsnames in host_stat_spec.items():
-            hs = hs_data[host]
+        for host, dsnames in tc.host_stat_spec.items():
+
+
+                        
+            hs = tc.hs_data[host]
+
+
             vc = hs.vcenter
             vc_user = hs.vcenter_user
             vc_pass = hs.vcenter_pass
             dc = hs.datacenter
             nic = hs.nic
             cls = hs.cluster
+            disk = hs.disk
 
-            logger.debug("Monitor Spec %s , %s , %s , %s , %s" % (dc,cls,host,nic,dsnames))
 
-            esx_stat_collection = multiprocessing.Process(target=EsxStats.PerfData, args=(logger,statrequired, vc, vc_user, vc_pass, dc, cls, host, nic, dsnames,))
+            #logger.debug("Monitor Spec %s , %s , %s , %s , %s" % (dc,cls,host,nic,dsnames))
+
+            #esx_stat_collection = multiprocessing.Process(target=EsxStats.PerfData, args=(logger,statrequired, vc, vc_user, vc_pass, dc, cls, host, nic, dsnames,))
+            esx_stat_collection = multiprocessing.Process(target=Esxtop.TopData, args=(logger,host,))
             esx_stat_collection.name = host
             esx_stat_collection.daemon = True
             esx_stat_collection.start()
 
-        time.sleep(5)  # Introducing Sleep to Collect Host Data First
+        # Introducing Sleep to Collect Host Data First
+        time.sleep(10)
 
         pool.map(v_motion_handler_wrapper, migration_specs)
         logger.debug('Closing virtual machine migration pool')
 
+        """
         for running_task in task_results:
             running_task.wait()
+        """
 
         logger.debug('Monitoring virtual machine migration task pool')
 
-        task_pool.close()
-        task_pool.join()
 
-        logger.info("Plotting Result.")
+
+        tc.HOST_METRICS_COLLECT = False
+
+
 
         hostplots = []
         esxhosts = []
@@ -259,7 +276,13 @@ def runTest():
 
         #GraphPlotter.PlotIt(vms=vmdb, datastoreinfo=host_stat_spec, otherhostinfo=hs_data)
 
-        GraphFeeder.DrawIt(vms=vmdb, datastoreinfo=host_stat_spec)
+        #GraphFeeder.DrawIt(vms=vmdb, datastoreinfo=host_stat_spec)
+
+
+
+        #GraphFeeder.CollectData(logger, tc.host_stat_spec, tc.hs_data, tc.vmdb)
+
+        logger.info("Plotting Result.")
 
 
 

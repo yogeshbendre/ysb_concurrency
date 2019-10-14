@@ -24,7 +24,7 @@ from collections import defaultdict,namedtuple
 import traceback
 
 
-vmdb = ["Mig-VM-01", "Mig-VM-02","Mig-V03","Mig-VM04"]
+vmdb = ["VM-1"]
 
 
 host_stat_spec = defaultdict()
@@ -106,6 +106,8 @@ try:
             rowVMSession = vdbSession()
             vmname = vm
             timerow = rowVMSession.query(VMStats.time).all()
+            print timerow
+            """
             progressrow = rowVMSession.query(VMStats.progress).all()
             xAxis = [datetime.datetime.utcfromtimestamp(float(t)) for t, in timerow]
             yAxis = [value for value, in progressrow]
@@ -119,7 +121,8 @@ try:
                 mode="markers+lines",
                 name=vmname,
             ), )
-        except Exception as e:
+            """
+        except Exception, e:
             print("THREAD -%s- Error while reading data from VM DB %s" % (vm, e))
 
         finally:
@@ -129,10 +132,12 @@ try:
 
 
 
+
     rowEsxSession = None
 
 
-
+    """
+    
 
     for host, dsnames in host_stat_spec.items():
         rowEsxSession = None
@@ -172,18 +177,6 @@ try:
 
             )
 
-            """
-            fig.layout.update(
-                yaxis=go.layout.YAxis(
-                            title=go.layout.yaxis.Title(
-                            text="y Axis",
-                            font=dict(family="Courier New, monospace", size=18, color="#7f7f7f")
-                            )
-                            )
-                )
-            """
-
-
 
 
             finalds = []
@@ -199,11 +192,7 @@ try:
             for ds in finalds:
                 rownum += 1
                 print "Ds is %s"%ds
-                """
-                dsrows = rowEsxSession.query(DSData).filter(DSData.datastore==ds).all()
-                for dsrow in dsrows:
-                    print ("%10s  %25s  %15s  %25s  %25s"%(dsrow.time,dsrow.datastore,dsrow.dsread,dsrow.dswrite,dsrow.unit))
-                """
+
                 print("Plotting for DS %s" % ds)
                 timerow = rowEsxSession.query(DSData.time).filter(DSData.datastore == ds).all()
                 dsreadplot = rowEsxSession.query(DSData.dsread).filter(DSData.datastore == ds).all()
@@ -232,7 +221,7 @@ try:
                 ), rownum, col=1)
 
 
-        except Exception as e:
+        except Exception, e:
             traceback.print_exc("THREAD -%s- Host Level Error while reading data from ESX DB %s" % (host, e))
 
         finally:
@@ -241,9 +230,10 @@ try:
 
     fig.layout.update(height=1400)
     plotly.offline.plot(fig, filename='Result.html')
+    """
 
 
-except Exception as e:
+except Exception, e:
     traceback.print_exc("THREAD -main- Error while reading data from ESX DB %s" % ( e))
 
 
