@@ -131,8 +131,7 @@ def main():
 
     if log_file == 'nolog':
         TestConstants.logger = generate_logger(log_level, log_file=None)
-        print("My Logger:")
-        print(TestConstants.logger)
+
     else:
         log_file = log_file
         if not log_file:
@@ -140,6 +139,8 @@ def main():
             log_file = ops_name + "-" + TestConstants.test_start + ".log"
             TestConstants.logger = generate_logger(log_level, log_file=log_file)
 
+    print("My Logger:")
+    print(TestConstants.logger)
     ssl_context = None
     context = ssl._create_unverified_context()
 
