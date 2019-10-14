@@ -88,11 +88,11 @@ dest = "w1-hs4-n2216.eng.vmware.com"
 
 """
 
-hs1 = hostdetails("10.199.24.1","Administrator@vsphere.local","Admin!23","Datacenter3","cls","vmnic1","vmhba64")
-hs2 = hostdetails("10.199.24.1","Administrator@vsphere.local","Admin!23","Datacenter3","cls","vmnic1","vmhba64")
+hs1 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter4","cloud_cluster_6","vmnic1","vmhba2")
+hs2 = hostdetails("10.172.109.23","Administrator@skyscraper.local","Admin!23","Datacenter4","cloud_cluster_6","vmnic1","vmhba2")
 
-src = "10.199.105.5"
-dest = "10.199.105.9"
+src = "w1-hs4-n2213.eng.vmware.com"
+dest = "w1-hs4-n2216.eng.vmware.com"
 
 hs_data[src] = hs1
 hs_data[dest] = hs2
