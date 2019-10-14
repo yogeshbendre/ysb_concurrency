@@ -28,7 +28,7 @@ pool = None
 task_pool = None
 task_results = []
 instance = 1
-stat_enable = {"nic" : False , "datastore" : False , "disk" : False}
+stat_enable = {"nic" : False , "datastore" : False , "disk" : False, "cpu" : False , "mem" : False}
 
 plottervmlist = []
 
@@ -46,13 +46,14 @@ SRC_DATACENTER=None
 DEST_DATACENTER=None
 HOST_NAME=None
 DEST_HOST_NAME=None
-SRC_DATASTORE_NAME=None
+DATASTORE=None
 DEST_DATASTORE=None
 SRC_CLUSTER=None
 DEST_CLUSTER=None
 VM_NAME=None
 PNIC = None
 STAT_COLLLECTION_LIST=None
+SRC_PNIC = None
 
 
 POWER_STATE=None
@@ -106,7 +107,7 @@ def getXHost():
     return getData(test_data,"DEST_HOST_NAME")
 
 def getDatastore():
-    return getData(test_data,"DATASTORE_NAME")
+    return getData(test_data,"DATASTORE")
 
 def getXDatastore():
     return getData(test_data,"DEST_DATASTORE")
@@ -124,6 +125,9 @@ def getVM():
 
 def getPnic():
     return getData(test_data,"PNIC")
+
+def getSrcPnic():
+    return getData(test_data,"SRC_PNIC")
 
 
 def getStatsList():

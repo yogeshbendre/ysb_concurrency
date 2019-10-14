@@ -29,7 +29,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship,sessionmaker
 from sqlalchemy import create_engine
 
-
+import time
 
 logger = tc.logger
 pool = tc.pool
@@ -116,7 +116,11 @@ def runTest():
             datastore = tc.getXDatastore()
             powerstate = tc.getPowerState()
             newvm = tc.getVM()
-            print(vcenter)
+
+            src_host = tc.getHost()
+            src_nic = tc.getSrcPnic()
+            src_datastore = tc.getDatastore()
+
 
 
 
@@ -128,13 +132,17 @@ def runTest():
             #clusterhost[host] = destination_cluster
 
             hs = hostdetails(vcenter,vcenter_user,vcenter_pass,datacenter,destination_cluster,pnic)
-
             hs_data[host] = hs
+
+            src_hs = hostdetails(vcenter, vcenter_user, vcenter_pass, datacenter, container, src_nic)
+            hs_data[src_host] = src_hs
 
 
             #vmotionnic[host] = pnic
 
             host_stat_spec.setdefault(host, []).append(datastore)
+
+            host_stat_spec.setdefault(src_host, []).append(src_datastore)
 
             si = mem.getMemSi(vcenter, vcenter_user, vcenter_pass)
             logger.info("Login Successful")
@@ -225,9 +233,7 @@ def runTest():
             esx_stat_collection.daemon = True
             esx_stat_collection.start()
 
-
-
-
+        time.sleep(5)  # Introducing Sleep to Collect Host Data First
 
         pool.map(v_clone_handler_wrapper, clone_specs)
         logger.debug('Closing virtual machine cloning pool')

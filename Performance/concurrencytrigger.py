@@ -95,7 +95,6 @@ def main():
     log_file = None
     if args.logfile:
         log_file = args.logfile[0]
-        #print ("Debug %s"%log_file)
 
     ops_name = None
     if args.ops:
@@ -139,17 +138,9 @@ def main():
             TestConstants.test_start = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
             log_file = ops_name + "-" + TestConstants.test_start + ".log"
             TestConstants.logger = generate_logger(log_level, log_file=log_file)
-            #print(TestConstants.logger)
-        else:
-            TestConstants.test_start = datetime.datetime.now().strftime("%d%m%Y%H%M%S")
-            #log_file = ops_name + "-" + TestConstants.test_start + ".log"
-            TestConstants.logger = generate_logger(log_level, log_file=log_file)
-
 
     ssl_context = None
     context = ssl._create_unverified_context()
-
-    TestConstants.logger.info("Tests The Logger")
 
 
 
@@ -161,10 +152,10 @@ def main():
         try:
             engine = create_engine('sqlite:///%s' % myDb)
             remove_db(engine, myDb)
-        except Exception as e:
+        except Exception, e:
             print("Could Not Remove DB %s due to error %s." % (myDb, e))
 
-    TestConstants.logger.debug('Setting up pools and process for migration')
+    TestConstants.logger.debug('Setting up pools and process for %s operation'%ops_name)
     TestConstants.pool = ThreadPool(threads)
     TestConstants.task_pool = ThreadPool(threads)
 
@@ -184,6 +175,12 @@ def main():
                 TestConstants.stat_enable["datastore"] = True
             if stat in "disk":
                 TestConstants.stat_enable["disk"] = True
+            if stat in "cpu":
+                TestConstants.stat_enable["cpu"] = True
+            if stat in "mem":
+                TestConstants.stat_enable["mem"] = True
+
+
         #print "Debug %s"%test_data
 
         #Reflect the Test Type and Start Run

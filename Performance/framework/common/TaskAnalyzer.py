@@ -51,7 +51,7 @@ def Analyze(logger,si,vm_name,task):
         vmStatQ = VMStats(time=queue_time, vmname=vm_name, legend="Queued",progress = 0)
         vmsession.add(vmStatQ)
         vmsession.commit()
-        logger.info("VM %s Migration Queue Time %s" % (vm_name, queue_time))
+        logger.info("VM %s Operation Queue Time %s" % (vm_name, queue_time))
 
         start_time = None
 
@@ -73,7 +73,7 @@ def Analyze(logger,si,vm_name,task):
                     vmsession.commit()
 
                     # clone_stamp["StartTime"] = str(start_time)
-                    logger.info("VM %s Migration Start Time %s" % (vm_name, start_time))
+                    logger.info("VM %s Operation Start Time %s" % (vm_name, start_time))
                     startRecorded = True
                 #logger.info("VM %s Migration Start Time %s" % (vm_name, start_time))
                 else:
@@ -84,7 +84,7 @@ def Analyze(logger,si,vm_name,task):
 
             if task.info.state == vim.TaskInfo.State.success:
                 if task.info.result is not None:
-                    out = '%s migration completed successfully, result: %s' % (vm_name, task.info.result)
+                    out = '%s Operation completed successfully, result: %s' % (vm_name, task.info.result)
                     logger.info(out)
                     complete_time = parse(str(task.info.completeTime),tzinfos=tzinfos).strftime('%s')
                     #clone_stamp["CompleteTime"] = str(complete_time)
@@ -94,7 +94,7 @@ def Analyze(logger,si,vm_name,task):
                     time.sleep(5)
                     run_loop = False
                 else:
-                    out = '%s migration completed successfully.' % vm_name
+                    out = '%s Operation completed successfully.' % vm_name
                     logger.info(out)
                     complete_time = parse(str(task.info.completeTime),tzinfos=tzinfos).strftime('%s')
                     #clone_stamp["CompleteTime"] = str(complete_time)
@@ -104,7 +104,7 @@ def Analyze(logger,si,vm_name,task):
                     time.sleep(5)
                     run_loop = False
             elif task.info.error is not None:
-                out = '%s migration did not complete successfully: %s' % (vm_name, task.info.error)
+                out = '%s Operation did not complete successfully: %s' % (vm_name, task.info.error)
                 logger.error(out)
                 complete_time = parse(str(task.info.completeTime),tzinfos=tzinfos).strftime('%s')
                 #clone_stamp["CompleteTime"] = str(complete_time)
@@ -113,15 +113,15 @@ def Analyze(logger,si,vm_name,task):
                 vmsession.commit()
                 run_loop = False
             else:
-                logger.info('%s migration status: %s' % (vm_name, task.info.state))
+                logger.info('%s Operation status: %s' % (vm_name, task.info.state))
 
 
 
-    except Exception as e:
+    except Exception, e:
         logger.error("%s -  Error while entring data to Task DB %s"%(vm_name,e))
     finally:
         vmsession.close()
 
 
-    logger.info("VM %s Migration Complete Time %s" % (vm_name, complete_time))
+    logger.info("VM %s Operation Complete Time %s" % (vm_name, complete_time))
     #cloning_time_stamp[vm_name] = clone_stamp

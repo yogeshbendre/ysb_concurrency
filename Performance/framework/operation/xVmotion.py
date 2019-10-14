@@ -105,7 +105,7 @@ def v_motion_handler(logger,template_vm, destination_vcenter,destination_vcenter
     except vmodl.MethodFault, e:
         logger.error("Caught vmodl fault: %s" % e.msg)
 
-    except Exception as e:
+    except Exception, e:
         logger.error("Caught exception: %s" % str(e))
 
 

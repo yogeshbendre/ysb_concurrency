@@ -10,8 +10,8 @@ function load() {
 
     vmresult = testdata.vm ;
 
-    for (var vmname in vmresult) {
-        vmarray.push(vmname)
+    for (var vmname in vmresult) {   
+        vmarray.push(vmname)     
         vmDatas = vmresult[vmname]
         vmDatas.forEach(element => {
             data.push({ date: new Date(element["Time"]), [vmname]: element["Progress"] });
@@ -24,9 +24,9 @@ function load() {
     for (var hostname in nicresult){
         var sent = hostname + "sent";
         var got = hostname + "got" ;
-        nicarray.push(hostname)
+        nicarray.push(hostname)        
         nicDatas = nicresult[hostname]
-        nicDatas.forEach(element => {
+        nicDatas.forEach(element => {            
             data.push({ date: new Date(element["Time"]), [hostname]: element["Bandwidth"] ,[sent]: element["Transmitted"], [got]: element["Received"]});
         });
 
@@ -40,17 +40,17 @@ function load() {
         var writeKey = ds + "Write"
         dsarray.push(ds)
         dsDatas = dsresult[ds]
-        dsDatas.forEach(element => {
-            data.push({ date: new Date(element["Time"]), [readLatencyKey]: element["ReadLatency"] ,
+        dsDatas.forEach(element => {            
+            data.push({ date: new Date(element["Time"]), [readLatencyKey]: element["ReadLatency"] , 
             [writeLatencyKey] : element["WriteLatency"], [readKey]:element["Read"],[writeKey]:element["Write"]});
         });
 
     }
 
     memresults = testdata.mem
-    for (var hsname in memresults) {
-        var memoryusage = hsname + "memusage"
-        memarray.push(hsname)
+    for (var hsname in memresults) {  
+        var memoryusage = hsname + "memusage" 
+        memarray.push(hsname)     
         memDatas = memresults[hsname]
         //console.log(memresults[hsname])
         memDatas.forEach(element => {

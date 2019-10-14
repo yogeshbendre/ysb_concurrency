@@ -28,7 +28,7 @@ from plotly.tools import make_subplots
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship,sessionmaker
 from sqlalchemy import create_engine
-
+import time
 
 
 logger = tc.logger
@@ -85,7 +85,7 @@ def v_motion_handler(logger,si,template_vm,host_mor,ds_mor,task_pool,task_result
     except vmodl.MethodFault, e:
         logger.error("Caught vmodl fault: %s" % e.msg)
 
-    except Exception as e:
+    except Exception, e:
         logger.error("Caught exception: %s" % str(e))
 
 
@@ -123,6 +123,14 @@ def runTest():
             datastore = tc.getXDatastore()
             pnic = tc.getPnic()
 
+            #Source Host Parameter
+
+            src_host = tc.getHost()
+            src_nic = tc.getSrcPnic()
+            src_datastore = tc.getDatastore()
+
+
+
 
             tc.logger.debug("THREAD - MAIN - Instance %s specs for %s operation is %s %s %s %s %s %s %s %s %s" % (
             instance, test_vm, vcenter, vcenter_user,
@@ -135,10 +143,17 @@ def runTest():
 
             hs_data[host] = hs
 
-
             #vmotionnic[host] = pnic
 
             host_stat_spec.setdefault(host, []).append(datastore)
+
+            # Source Host Spec for Stat Collection
+
+            src_hs = hostdetails(vcenter, vcenter_user, vcenter_pass, src_datacenter, container, src_nic)
+            hs_data[src_host] = src_hs
+            host_stat_spec.setdefault(src_host, []).append(src_datastore)
+
+
 
             si = mem.getMemSi(vcenter, vcenter_user, vcenter_pass)
             logger.info("Login Successful")
@@ -219,6 +234,8 @@ def runTest():
             esx_stat_collection.name = host
             esx_stat_collection.daemon = True
             esx_stat_collection.start()
+
+        time.sleep(5)  # Introducing Sleep to Collect Host Data First
 
         pool.map(v_motion_handler_wrapper, migration_specs)
         logger.debug('Closing virtual machine migration pool')

@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="680d693b-aec7-4e47-a82f-fa5d2ff6b829" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/framework/data/clone_create_base32.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/data/clone_create_32.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlotFeeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlotFeeder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/concurrencytrigger.py" beforeDir="false" afterPath="$PROJECT_DIR$/concurrencytrigger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/creategraph.js" beforeDir="false" afterPath="$PROJECT_DIR$/creategraph.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/common/EsxStats.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/common/EsxStats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/common/TaskAnalyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/common/TaskAnalyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/common/TestConstants.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/common/TestConstants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/graphs/GraphFeeder.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/graphs/GraphFeeder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/operation/CloneOps.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/operation/CloneOps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/operation/MigrateOps.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/operation/MigrateOps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/operation/xVmotion.py" beforeDir="false" afterPath="$PROJECT_DIR$/framework/operation/xVmotion.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
