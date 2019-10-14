@@ -14,7 +14,7 @@ MigrateOps-*-DEST_HOST_NAME=w1-hs4-n2213.eng.vmware.com
 MigrateOps-*-PNIC=vmnic0
 
 #pnic,datastore
-MigrateOps-*-STAT_COLLLECTION_LIST=pnic,datastore
+MigrateOps-*-STAT_COLLLECTION_LIST=pnic,datastore,mem,disk
 
 MigrateOps-1-VM_NAME=Test-VM-01
 MigrateOps-1-DEST_DATASTORE=Local-2213-1
