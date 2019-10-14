@@ -7,6 +7,10 @@ MigrateOps-*-PRIMARY_LDU_PASSWD=Admin!23
 MigrateOps-*-DATACENTER=Datacenter4
 MigrateOps-*-CLUSTER=cloud_cluster_6
 
+MigrateOps-*-SRC_DISK=vmhba2
+MigrateOps-*-DEST_DISK=vmhba2
+
+
 MigrateOps-*-DEST_DATACENTER=Datacenter4
 MigrateOps-*-DEST_CLUSTER=cloud_cluster_6
 MigrateOps-*-DEST_HOST_NAME=w1-hs4-n2213.eng.vmware.com
