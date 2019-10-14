@@ -4,6 +4,9 @@ MigrateOps-*-PRIMARY_LDU_NAME=10.172.109.23
 MigrateOps-*-PRIMARY_LDU_USER_NAME=administrator@skyscraper.local
 MigrateOps-*-PRIMARY_LDU_PASSWD=Admin!23
 
+MigrateOps-*-HOST_NAME=w1-hs4-n2216.eng.vmware.com
+
+
 MigrateOps-*-DATACENTER=Datacenter4
 MigrateOps-*-CLUSTER=cloud_cluster_6
 
