@@ -24,20 +24,20 @@ MigrateOps-*-PNIC=vmnic1
 #pnic,datastore
 MigrateOps-*-STAT_COLLLECTION_LIST=pnic,datastore,mem,disk
 
-MigrateOps-1-VM_NAME=Test-VM-01
-MigrateOps-2-VM_NAME=Test-VM-02
-MigrateOps-3-VM_NAME=Test-VM-03
-MigrateOps-4-VM_NAME=Test-VM-04
-MigrateOps-5-VM_NAME=Test-VM-05
-MigrateOps-6-VM_NAME=Test-VM-06
-MigrateOps-7-VM_NAME=Test-VM-07
-MigrateOps-8-VM_NAME=Test-VM-08
+MigrateOps-1-VM_NAME=Test-VM01
+MigrateOps-2-VM_NAME=Test-VM02
+MigrateOps-3-VM_NAME=Test-VM03
+MigrateOps-4-VM_NAME=Test-VM04
+MigrateOps-5-VM_NAME=Test-VM05
+MigrateOps-6-VM_NAME=Test-VM06
+MigrateOps-7-VM_NAME=Test-VM07
+MigrateOps-8-VM_NAME=Test-VM08
 
-MigrateOps-9-VM_NAME=Test-VM-09
-MigrateOps-10-VM_NAME=Test-VM-10
-MigrateOps-11-VM_NAME=Test-VM-11
-MigrateOps-12-VM_NAME=Test-VM-12
-MigrateOps-13-VM_NAME=Test-VM-13
-MigrateOps-14-VM_NAME=Test-VM-14
-MigrateOps-15-VM_NAME=Test-VM-15
-MigrateOps-16-VM_NAME=Test-VM-16
+MigrateOps-9-VM_NAME=Test-VM09
+MigrateOps-10-VM_NAME=Test-VM10
+MigrateOps-11-VM_NAME=Test-VM11
+MigrateOps-12-VM_NAME=Test-VM12
+MigrateOps-13-VM_NAME=Test-VM13
+MigrateOps-14-VM_NAME=Test-VM14
+MigrateOps-15-VM_NAME=Test-VM15
+MigrateOps-16-VM_NAME=Test-VM16
